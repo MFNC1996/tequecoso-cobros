@@ -2,10 +2,8 @@ Acta semanal
 
 ACTA DE REUNIÓN SEMANAL
 Proyecto: Control de cobros a clientes – @Tequecoso
-Fecha: [coloca la fecha de la reunión]
-Hora: [coloca la hora]
 Modalidad: Asincrónica / Presencial / Virtual
-Participantes: [nombres del grupo]
+Participantes: Mauricio Nuñez
 1. Planificación
 
 Se realizó una reunión de planificación para definir el avance correspondiente a la primera entrega del proyecto. Se acordó trabajar el problema de control de cobros a clientes, debido a que actualmente la microempresa registra la información de forma manual en un cuaderno, lo que provoca desorden, atrasos y falta de visibilidad sobre los pagos pendientes.
