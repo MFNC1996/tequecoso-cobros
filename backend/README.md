@@ -1,10 +1,10 @@
 # Backend Cobros - Tequecoso
 
-Backend desarrollado con Spring Boot para gestionar clientes, cobros, proveedores y pagos a proveedores. El proyecto ya expone endpoints REST y fue probado localmente con ejecución por terminal usando Maven.[1][2]
+Backend desarrollado con Spring Boot para gestionar clientes, cobros, proveedores y pagos a proveedores. El proyecto expone endpoints REST y fue probado localmente usando Maven y curl desde terminal.
 
 ## Estructura del proyecto
 
-La aplicación usa una clase principal `CobrosApplication`, un archivo `application.properties`, modelos Java y controladores REST separados por carpetas. La estructura base observada incluye `controller`, `model`, `pom.xml` y recursos de Spring Boot.[3][4][1]
+La aplicación utiliza una clase principal `CobrosApplication`, un archivo `application.properties`, modelos Java y controladores REST separados por carpetas.
 
 ```text
 backend/cobros/
@@ -18,34 +18,44 @@ backend/cobros/
 
 ## Tecnologías usadas
 
-- Java 17 configurado en `pom.xml`.[1]
-- Spring Boot 4.1.0 como base del proyecto.[1]
-- Maven para compilación y ejecución.[2][1]
-- API REST con controladores anotados con `@RestController`.[5][6]
+- Java 17
+- Spring Boot
+- Maven
+- API REST con controladores anotados con `@RestController`
 
 ## Endpoints disponibles
 
 | Recurso | Método | Ruta | Descripción |
 |---|---|---|---|
-| Clientes | GET | `/api/clientes` | Lista los clientes registrados.[5] |
-| Clientes | POST | `/api/clientes` | Registra un nuevo cliente.[5] |
-| Cobros | GET | `/api/cobros` | Lista los cobros registrados.[6] |
-| Cobros | POST | `/api/cobros` | Registra un nuevo cobro.[6][2] |
-| Proveedores | GET | `/api/proveedores` | Lista los proveedores registrados.[7] |
-| Proveedores | POST | `/api/proveedores` | Registra un nuevo proveedor.[7] |
-| Pagos a proveedor | GET | `/api/pagos-proveedor` | Lista los pagos registrados.[7] |
-| Pagos a proveedor | POST | `/api/pagos-proveedor` | Registra un nuevo pago a proveedor.[7] |
+| Clientes | GET | `/api/clientes` | Lista los clientes registrados. |
+| Clientes | POST | `/api/clientes` | Registra un nuevo cliente. |
+| Cobros | GET | `/api/cobros` | Lista los cobros registrados. |
+| Cobros | POST | `/api/cobros` | Registra un nuevo cobro. |
+| Proveedores | GET | `/api/proveedores` | Lista los proveedores registrados. |
+| Proveedores | POST | `/api/proveedores` | Registra un nuevo proveedor. |
+| Pagos a proveedor | GET | `/api/pagos-proveedor` | Lista los pagos registrados. |
+| Pagos a proveedor | POST | `/api/pagos-proveedor` | Registra un nuevo pago a proveedor. |
 
 ## Ejecución local
 
-Para ejecutar el proyecto localmente se usa Maven desde la carpeta `backend/cobros`. El `README` original del proyecto ya contemplaba el uso de `mvn spring-boot:run`.[2]
+Para ejecutar el proyecto localmente:
 
 ```bash
 cd backend/cobros
 mvn spring-boot:run
 ```
 
-Si la aplicación inicia correctamente, queda disponible en `http://localhost:8080` y Spring Boot usa el nombre de aplicación `cobros` definido en `application.properties`.[4]
+En Windows también puede usarse:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+Si la aplicación inicia correctamente, queda disponible en:
+
+```bash
+http://localhost:8080
+```
 
 ## Ejemplos de prueba
 
@@ -77,6 +87,34 @@ curl -X POST http://localhost:8080/api/cobros \
 curl http://localhost:8080/api/cobros
 ```
 
+### Crear proveedor
+
+```bash
+curl -X POST http://localhost:8080/api/proveedores \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Distribuidora ABC","telefono":"0412-0000000","direccion":"Maracay","observacion":"Entrega semanal"}'
+```
+
+### Consultar proveedores
+
+```bash
+curl http://localhost:8080/api/proveedores
+```
+
+### Crear pago a proveedor
+
+```bash
+curl -X POST http://localhost:8080/api/pagos-proveedor \
+  -H "Content-Type: application/json" \
+  -d '{"proveedor":"Distribuidora ABC","fecha":"2026-07-08","monto":150.0,"metodoPago":"Transferencia","observacion":"Pago parcial"}'
+```
+
+### Consultar pagos a proveedor
+
+```bash
+curl http://localhost:8080/api/pagos-proveedor
+```
+
 ## Observación actual
 
-Los controladores vistos almacenan información en listas en memoria, por lo que los datos se pierden al reiniciar la aplicación. Esto es consistente con la implementación actual basada en `ArrayList` dentro de los controladores mostrados.[5][6]
+La implementación actual utiliza almacenamiento en memoria mediante listas, por lo que los datos se pierden al reiniciar la aplicación. Esta versión corresponde a un MVP funcional para la entrega académica.
