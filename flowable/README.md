@@ -8,7 +8,7 @@ Implementar procesos simples, funcionales y ejecutables en Flowable, alineados c
 
 ## Contenido de la carpeta
 
-```bash
+```text
 flowable/
 ├── bpmn/
 ├── forms/
