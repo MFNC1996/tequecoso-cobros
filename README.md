@@ -40,7 +40,7 @@ tequecoso-cobros/
 
 ### BPMN/
 
-Contiene los modelos BPMN del proyecto.
+Contiene los modelos BPMN del proyecto y las capturas de evidencia relacionadas con los procesos.
 
 ### backend/
 
@@ -48,11 +48,11 @@ Contiene el proyecto Spring Boot con los servicios web del sistema.
 
 ### docs/
 
-Contiene actas, formularios, capturas, evidencia y documentación del proyecto.
+Contiene actas, documentación y material de apoyo del proyecto.
 
 ### flowable/
 
-Contiene la implementación y referencia de los procesos ejecutados en Flowable.
+Contiene la referencia funcional de los procesos implementados en Flowable.
 
 ## Backend implementado
 
