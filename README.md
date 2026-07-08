@@ -32,22 +32,27 @@ Actualmente el proyecto incluye los siguientes procesos ejecutables:
 ```text
 tequecoso-cobros/
 ├── README.md
+├── BPMN/
 ├── backend/
-├── flowable/
-└── docs/
+├── docs/
+└── flowable/
 ```
+
+### BPMN/
+
+Contiene los modelos BPMN del proyecto.
 
 ### backend/
 
 Contiene el proyecto Spring Boot con los servicios web del sistema.
 
-### flowable/
-
-Contiene los modelos BPMN, formularios y evidencia relacionada con Flowable.
-
 ### docs/
 
-Contiene actas, decisiones, evidencia y documentación del proyecto.
+Contiene actas, formularios, capturas, evidencia y documentación del proyecto.
+
+### flowable/
+
+Contiene la implementación y referencia de los procesos ejecutados en Flowable.
 
 ## Backend implementado
 
