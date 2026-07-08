@@ -1,47 +1,82 @@
-# Documentación - Tequecoso Cobros
+# Backend Cobros - Tequecoso
 
-Esta carpeta reúne la documentación del proyecto, incluyendo evidencia del trabajo realizado, actas, decisiones técnicas y material de apoyo. [file:1]
+Backend desarrollado con Spring Boot para gestionar clientes, cobros, proveedores y pagos a proveedores. El proyecto ya expone endpoints REST y fue probado localmente con ejecución por terminal usando Maven.[1][2]
 
-## Objetivo
+## Estructura del proyecto
 
-Mantener registro claro del trabajo del equipo y respaldar el avance del proyecto con evidencia verificable. La pauta del curso exige demostrar el trabajo realizado mediante repositorio, documentación y actas. [file:1]
+La aplicación usa una clase principal `CobrosApplication`, un archivo `application.properties`, modelos Java y controladores REST separados por carpetas. La estructura base observada incluye `controller`, `model`, `pom.xml` y recursos de Spring Boot.[3][4][1]
 
-## Estructura sugerida
-
-```bash
-docs/
-├── actas/
-├── decisiones/
-└── evidencia/
+```text
+backend/cobros/
+├── pom.xml
+├── src/main/java/com/tequecoso/cobros/
+│   ├── CobrosApplication.java
+│   ├── controller/
+│   └── model/
+└── src/main/resources/application.properties
 ```
 
-### actas/
-Contiene actas de reuniones semanales del equipo.
+## Tecnologías usadas
 
-Cada acta debería incluir:
+- Java 17 configurado en `pom.xml`.[1]
+- Spring Boot 4.1.0 como base del proyecto.[1]
+- Maven para compilación y ejecución.[2][1]
+- API REST con controladores anotados con `@RestController`.[5][6]
 
-- Qué se planificó.
-- Qué se hizo.
-- Problemas encontrados.
-- Próximos pasos. [file:1]
+## Endpoints disponibles
 
-### decisiones/
-Contiene notas breves sobre decisiones del proyecto, por ejemplo:
+| Recurso | Método | Ruta | Descripción |
+|---|---|---|---|
+| Clientes | GET | `/api/clientes` | Lista los clientes registrados.[5] |
+| Clientes | POST | `/api/clientes` | Registra un nuevo cliente.[5] |
+| Cobros | GET | `/api/cobros` | Lista los cobros registrados.[6] |
+| Cobros | POST | `/api/cobros` | Registra un nuevo cobro.[6][2] |
+| Proveedores | GET | `/api/proveedores` | Lista los proveedores registrados.[7] |
+| Proveedores | POST | `/api/proveedores` | Registra un nuevo proveedor.[7] |
+| Pagos a proveedor | GET | `/api/pagos-proveedor` | Lista los pagos registrados.[7] |
+| Pagos a proveedor | POST | `/api/pagos-proveedor` | Registra un nuevo pago a proveedor.[7] |
 
-- simplificación de procesos BPMN,
-- cambios de nombres,
-- reorganización del repositorio,
-- ajustes de formularios en Flowable.
+## Ejecución local
 
-### evidencia/
-Contiene material que respalda el avance del proyecto, por ejemplo:
+Para ejecutar el proyecto localmente se usa Maven desde la carpeta `backend/cobros`. El `README` original del proyecto ya contemplaba el uso de `mvn spring-boot:run`.[2]
 
-- capturas de procesos funcionando,
-- capturas de formularios,
-- capturas de backend,
-- notas de prueba,
-- enlaces a videos o material de presentación. [file:1]
+```bash
+cd backend/cobros
+mvn spring-boot:run
+```
 
-## Importancia de esta carpeta
+Si la aplicación inicia correctamente, queda disponible en `http://localhost:8080` y Spring Boot usa el nombre de aplicación `cobros` definido en `application.properties`.[4]
 
-La documentación permite demostrar trabajo real, organización del equipo y evolución del proyecto. Esto es especialmente relevante porque la pauta exige evidencia concreta y no solo una declaración de avance. [file:1]
+## Ejemplos de prueba
+
+### Crear cliente
+
+```bash
+curl -X POST http://localhost:8080/api/clientes \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Juan Perez","telefono":"0412-1234567","direccion":"Maracay","observacion":"Cliente nuevo"}'
+```
+
+### Consultar clientes
+
+```bash
+curl http://localhost:8080/api/clientes
+```
+
+### Crear cobro
+
+```bash
+curl -X POST http://localhost:8080/api/cobros \
+  -H "Content-Type: application/json" \
+  -d '{"cliente":"Juan Perez","monto":15000,"estado":"pendiente"}'
+```
+
+### Consultar cobros
+
+```bash
+curl http://localhost:8080/api/cobros
+```
+
+## Observación actual
+
+Los controladores vistos almacenan información en listas en memoria, por lo que los datos se pierden al reiniciar la aplicación. Esto es consistente con la implementación actual basada en `ArrayList` dentro de los controladores mostrados.[5][6]
