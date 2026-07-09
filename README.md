@@ -35,3 +35,15 @@ El proyecto se encuentra en etapa de entrega y contiene los elementos principale
 
 ## Observación
 Este repositorio se organiza para facilitar la revisión del trabajo, la trazabilidad del desarrollo y la presentación de la solución final.
+## Estado actual del módulo de cobros
+
+El repositorio incluye:
+
+- proceso BPMN de cobro a clientes en la carpeta `BPMN/`
+- backend REST en la carpeta `backend/`
+- documentación y evidencias en la carpeta `docs/`
+- formularios asociados en la carpeta `forms/`
+- material multimedia en la carpeta `media/`
+
+El backend REST fue probado exitosamente en entorno local con curl para los endpoints `GET /api/cobros` y `POST /api/cobros`.
+La integración desde Flowable mediante HTTP Task fue configurada, pero no se logró completar en la ejecución final por conectividad entre entornos.
