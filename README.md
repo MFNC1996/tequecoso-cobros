@@ -1,49 +1,83 @@
-# Proyecto de Integración de Plataformas
+# Tequecoso Cobros
 
-Este repositorio contiene la solución desarrollada para la entrega del curso de Integración de Plataformas, implementada con Flowable, formularios asociados, backend de soporte y documentación del proyecto.
-
-## Descripción general
-La solución está orientada a automatizar procesos de negocio mediante BPMN en Flowable. El proyecto incluye procesos para registro de clientes, registro de proveedores, cobro a clientes y pago a proveedores, junto con sus respectivos formularios y evidencia de ejecución.
+Proyecto académico para modelar procesos en Flowable e implementar un backend REST en Spring Boot para la gestión de cobros a clientes.
 
 ## Estructura del repositorio
 
-- `bpmn/`: contiene los procesos BPMN del proyecto.
-- `forms/`: contiene los formularios asociados a los procesos.
-- `backend/`: contiene el código fuente del backend de soporte.
-- `docs/`: contiene arquitectura, casos de prueba, evidencias y videos.
-- `media/`: contiene material visual de apoyo, si aplica.
+- `BPMN/`: procesos BPMN del proyecto.
+- `backend/`: backend REST desarrollado con Spring Boot.
+- `docs/`: evidencias, pruebas y documentación.
+- `forms/`: formularios y capturas relacionadas con Flowable.
+- `media/`: material multimedia del proyecto.
 
-## Procesos incluidos
-- Registro de clientes.
-- Registro de proveedores.
-- Cobro a clientes.
-- Pago a proveedores.
+## Proceso incorporado
 
-## Evidencia y documentación
-La documentación del proyecto se encuentra en la carpeta `docs/`, donde se incluyen:
+Se incluye el proceso `cobroAClientes.bpmn`, modelado en Flowable, con formulario de captura de datos y una configuración de integración mediante HTTP Task.
 
-- `arquitectura.md`: descripción general de la arquitectura de la solución.
-- `casos-de-prueba.md`: escenarios probados y resultados obtenidos.
-- `evidencias/`: capturas y material de respaldo.
-- `videos/`: enlaces o referencias a los videos de presentación.
+## Backend REST
 
-## Objetivo del proyecto
-El objetivo principal es demostrar una solución funcional e integrada que permita gestionar procesos de negocio de forma ordenada, automatizada y trazable dentro del entorno de Flowable.
+El backend implementa los siguientes endpoints:
 
-## Estado actual
-El proyecto se encuentra en etapa de entrega y contiene los elementos principales requeridos para la Evaluación 3.
+- `GET /api/cobros`: retorna la lista de cobros registrados.
+- `POST /api/cobros`: registra un nuevo cobro.
 
-## Observación
-Este repositorio se organiza para facilitar la revisión del trabajo, la trazabilidad del desarrollo y la presentación de la solución final.
-## Estado actual del módulo de cobros
+Los datos del cobro consideran los campos:
 
-El repositorio incluye:
+- `cliente`
+- `monto`
+- `fechaVencimiento`
+- `estado`
 
-- proceso BPMN de cobro a clientes en la carpeta `BPMN/`
-- backend REST en la carpeta `backend/`
-- documentación y evidencias en la carpeta `docs/`
-- formularios asociados en la carpeta `forms/`
-- material multimedia en la carpeta `media/`
+## Ejecución local
 
-El backend REST fue probado exitosamente en entorno local con curl para los endpoints `GET /api/cobros` y `POST /api/cobros`.
-La integración desde Flowable mediante HTTP Task fue configurada, pero no se logró completar en la ejecución final por conectividad entre entornos.
+Entrar a la carpeta del backend:
+
+```bash
+cd backend/cobros
+mvn spring-boot:run
+```
+
+O bien:
+
+```bash
+mvn clean package
+java -jar target/cobros-0.0.1-SNAPSHOT.jar
+```
+
+## Prueba por terminal
+
+Ejemplo de registro de cobro con `curl`:
+
+```bash
+curl -X POST http://localhost:8080/api/cobros \
+  -H "Content-Type: application/json" \
+  -d '{
+    "cliente": "Maria Gonzalez",
+    "monto": 22000,
+    "fechaVencimiento": "2026-08-15",
+    "estado": "pendiente"
+  }'
+```
+
+Consulta del listado:
+
+```bash
+curl http://localhost:8080/api/cobros
+```
+
+## Estado de integración con Flowable
+
+Se configuró el formulario del proceso y se diseñó la integración hacia el backend mediante HTTP Task con método `POST`, headers JSON y body alineado al modelo `Cobro`.
+
+El backend REST quedó operativo y validado mediante pruebas por terminal.
+
+La integración directa desde Flowable hacia el backend local no se logró completar en la ejecución final por un problema de conectividad entre el entorno de Flowable y el servicio local.
+
+## Tecnologías utilizadas
+
+- Flowable
+- Java
+- Spring Boot
+- Maven
+- REST API
+- GitHub
