@@ -1,184 +1,37 @@
-# Tequecoso Cobros
+# Proyecto de Integración de Plataformas
 
-Proyecto académico para apoyar a Tequecoso, una microempresa que actualmente registra su información de forma manual y necesita una solución digital básica para gestionar clientes, proveedores, cobros y pagos. El objetivo del proyecto es construir una solución funcional usando BPMN, Flowable y Web Services en Java.
+Este repositorio contiene la solución desarrollada para la entrega del curso de Integración de Plataformas, implementada con Flowable, formularios asociados, backend de soporte y documentación del proyecto.
 
-## Objetivo
+## Descripción general
+La solución está orientada a automatizar procesos de negocio mediante BPMN en Flowable. El proyecto incluye procesos para registro de clientes, registro de proveedores, cobro a clientes y pago a proveedores, junto con sus respectivos formularios y evidencia de ejecución.
 
-Este proyecto busca:
+## Estructura del repositorio
 
-- Gestionar clientes y proveedores.
-- Controlar cobros a clientes.
-- Controlar pagos a proveedores.
-- Mantener una solución simple, funcional y ejecutable como MVP.
+- `bpmn/`: contiene los procesos BPMN del proyecto.
+- `forms/`: contiene los formularios asociados a los procesos.
+- `backend/`: contiene el código fuente del backend de soporte.
+- `docs/`: contiene arquitectura, casos de prueba, evidencias y videos.
+- `media/`: contiene material visual de apoyo, si aplica.
 
-## Tecnologías utilizadas
-
-- BPMN para modelado de procesos.
-- Flowable para automatización y formularios.
-- Java con Spring Boot para Web Services.
-- GitHub para control de versiones y evidencia del trabajo.
-
-## Procesos implementados en Flowable
-
-Actualmente el proyecto incluye los siguientes procesos ejecutables:
-
+## Procesos incluidos
 - Registro de clientes.
 - Registro de proveedores.
 - Cobro a clientes.
 - Pago a proveedores.
 
-## Estructura del repositorio
+## Evidencia y documentación
+La documentación del proyecto se encuentra en la carpeta `docs/`, donde se incluyen:
 
-```text
-tequecoso-cobros/
-├── README.md
-├── BPMN/
-├── backend/
-├── docs/
-└── flowable/
-```
+- `arquitectura.md`: descripción general de la arquitectura de la solución.
+- `casos-de-prueba.md`: escenarios probados y resultados obtenidos.
+- `evidencias/`: capturas y material de respaldo.
+- `videos/`: enlaces o referencias a los videos de presentación.
 
-### BPMN/
+## Objetivo del proyecto
+El objetivo principal es demostrar una solución funcional e integrada que permita gestionar procesos de negocio de forma ordenada, automatizada y trazable dentro del entorno de Flowable.
 
-Contiene los modelos BPMN del proyecto y las capturas de evidencia relacionadas con los procesos.
+## Estado actual
+El proyecto se encuentra en etapa de entrega y contiene los elementos principales requeridos para la Evaluación 3.
 
-### backend/
-
-Contiene el proyecto Spring Boot con los servicios web del sistema.
-
-### docs/
-
-Contiene actas, documentación y material de apoyo del proyecto.
-
-### flowable/
-
-Contiene la referencia funcional de los procesos implementados en Flowable.
-
-## Backend implementado
-
-El backend desarrollado en Spring Boot incluye endpoints REST básicos para gestionar clientes, cobros, proveedores y pagos a proveedores.
-
-### Endpoints disponibles
-
-#### Clientes
-- `GET /api/clientes` para listar clientes.
-- `POST /api/clientes` para registrar un cliente.
-
-#### Cobros
-- `GET /api/cobros` para listar cobros.
-- `POST /api/cobros` para registrar un cobro.
-
-#### Proveedores
-- `GET /api/proveedores` para listar proveedores.
-- `POST /api/proveedores` para registrar un proveedor.
-
-#### Pagos a proveedores
-- `GET /api/pagos-proveedor` para listar pagos a proveedores.
-- `POST /api/pagos-proveedor` para registrar un pago a proveedor.
-
-## Ejemplos de JSON
-
-### Registrar cliente
-
-```json
-{
-  "nombre": "Juan Perez",
-  "telefono": "0412-1234567",
-  "direccion": "Maracay",
-  "observacion": "Cliente nuevo"
-}
-```
-
-### Registrar cobro
-
-```json
-{
-  "cliente": "Juan Perez",
-  "monto": 15000,
-  "estado": "pendiente"
-}
-```
-
-### Registrar proveedor
-
-```json
-{
-  "nombre": "Distribuidora ABC",
-  "telefono": "0412-0000000",
-  "direccion": "Maracay",
-  "observacion": "Entrega semanal"
-}
-```
-
-### Registrar pago a proveedor
-
-```json
-{
-  "proveedor": "Distribuidora ABC",
-  "fecha": "2026-07-08",
-  "monto": 150.0,
-  "metodoPago": "Transferencia",
-  "observacion": "Pago parcial"
-}
-```
-
-## Cómo ejecutar el backend
-
-Desde la carpeta del proyecto backend:
-
-```bash
-cd backend/cobros
-mvn spring-boot:run
-```
-
-En Windows también puede usarse:
-
-```bash
-mvnw.cmd spring-boot:run
-```
-
-Si la aplicación inicia correctamente, queda disponible en:
-
-```bash
-http://localhost:8080
-```
-
-## Cómo probar los endpoints
-
-Los endpoints pueden probarse desde navegador para solicitudes `GET` y desde terminal usando `curl` para solicitudes `POST`.
-
-Ejemplo para registrar un cliente:
-
-```bash
-curl -X POST http://localhost:8080/api/clientes \
-  -H "Content-Type: application/json" \
-  -d '{"nombre":"Juan Perez","telefono":"0412-1234567","direccion":"Maracay","observacion":"Cliente nuevo"}'
-```
-
-Ejemplo para consultar clientes:
-
-```bash
-curl http://localhost:8080/api/clientes
-```
-
-Se agregó una guía más detallada en:
-
-```text
-docs/README-pruebas-endpoints.md
-```
-
-## Estado actual del proyecto
-
-- Procesos BPMN simplificados para asegurar ejecución correcta en Flowable.
-- Formularios asociados a cada proceso.
-- Backend funcional para clientes, cobros, proveedores y pagos a proveedores.
-- Endpoints probados localmente con ejecución real en Spring Boot.
-- Repositorio reorganizado para mantener evidencia clara del avance.
-
-## Enfoque del proyecto
-
-Este proyecto se trabaja como un MVP, priorizando que los procesos sean funcionales antes que complejos. La pauta del curso indica explícitamente que no se espera un sistema perfecto, sino una solución funcional que resuelva el problema principal.
-
-## Observación actual
-
-La implementación actual del backend utiliza almacenamiento en memoria mediante listas, por lo que los datos registrados se pierden al reiniciar la aplicación. Esta versión corresponde a un avance funcional base para la entrega académica.
+## Observación
+Este repositorio se organiza para facilitar la revisión del trabajo, la trazabilidad del desarrollo y la presentación de la solución final.
