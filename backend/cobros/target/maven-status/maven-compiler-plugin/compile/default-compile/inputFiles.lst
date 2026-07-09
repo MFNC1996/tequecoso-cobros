@@ -1,9 +1,9 @@
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/CobrosApplication.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/ClienteController.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/CobroController.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/PagoProveedorController.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/ProveedorController.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Cliente.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Cobro.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/PagoProveedor.java
-/Users/mc/Desktop/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Proveedor.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/CobrosApplication.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/ClienteController.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/CobroController.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/PagoProveedorController.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/controller/ProveedorController.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Cliente.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Cobro.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/PagoProveedor.java
+/Users/mc/Desktop/IPLACEX 2026/tequecoso-cobros/backend/cobros/src/main/java/com/tequecoso/cobros/model/Proveedor.java

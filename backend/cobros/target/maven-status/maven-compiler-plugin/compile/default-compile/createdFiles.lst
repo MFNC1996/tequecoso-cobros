@@ -1,0 +1,9 @@
+com/tequecoso/cobros/model/Cliente.class
+com/tequecoso/cobros/model/Proveedor.class
+com/tequecoso/cobros/controller/PagoProveedorController.class
+com/tequecoso/cobros/controller/ProveedorController.class
+com/tequecoso/cobros/CobrosApplication.class
+com/tequecoso/cobros/controller/ClienteController.class
+com/tequecoso/cobros/model/Cobro.class
+com/tequecoso/cobros/controller/CobroController.class
+com/tequecoso/cobros/model/PagoProveedor.class
