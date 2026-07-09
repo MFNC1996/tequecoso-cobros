@@ -1,16 +1,35 @@
-# Videos de entrega
+# Videos del proyecto
 
-Esta carpeta contiene los videos elaborados como parte de la entrega del proyecto **Tequecoso Cobros**.
+En esta carpeta se encuentran las referencias a los videos preparados para la presentación de la solución.
 
-## Contenido
+## Video para la emprendedora
+Este video está orientado a explicar de manera simple la solución propuesta, mostrando cómo ayuda a resolver necesidades reales del negocio.
 
-- Video para la emprendedora: explicación general del avance del proyecto en un lenguaje simple y orientado al negocio.
-- Video para el profesor: explicación técnica del trabajo realizado, incluyendo BPMN, Flowable, backend y evidencia del repositorio.
+**Contenido sugerido:**
+- Problema del negocio.
+- Procesos implementados.
+- Beneficios de la solución.
+- Demostración general del funcionamiento.
 
-## Propósito
+**Enlace al video:**
+[Pegar aquí el enlace al video para la emprendedora]
 
-Estos videos forman parte de la evidencia de avance del proyecto y complementan la documentación, los modelos BPMN, las capturas, los formularios y el backend desarrollado.
+---
 
-## Relación con el proyecto
+## Video para el profesor
+Este video está orientado a la explicación técnica de la solución implementada.
 
-El objetivo de estos videos es mostrar de forma clara el progreso alcanzado en la solución propuesta para Tequecoso, tanto desde la perspectiva funcional como desde la perspectiva técnica.
+**Contenido sugerido:**
+- Arquitectura general del proyecto.
+- Procesos BPMN en Flowable.
+- Formularios utilizados.
+- Backend y servicios implementados.
+- Evidencia de ejecución y pruebas.
+
+**Enlace al video:**
+[Pegar aquí el enlace al video para el profesor]
+
+---
+
+## Nota
+Si los videos no están almacenados directamente en el repositorio, se recomienda compartirlos mediante un enlace externo accesible.
