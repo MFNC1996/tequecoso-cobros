@@ -1,120 +1,83 @@
-# Backend Cobros - Tequecoso
+# Backend - Tequecoso Cobros
 
-Backend desarrollado con Spring Boot para gestionar clientes, cobros, proveedores y pagos a proveedores. El proyecto expone endpoints REST y fue probado localmente usando Maven y curl desde terminal.
+Esta carpeta contiene el backend desarrollado en Java con Spring Boot para soportar la solución del proyecto.
 
-## Estructura del proyecto
+## Descripción
+El backend implementa servicios web básicos relacionados con la gestión de clientes, proveedores, cobros y pagos a proveedores.
 
-La aplicación utiliza una clase principal `CobrosApplication`, un archivo `application.properties`, modelos Java y controladores REST separados por carpetas.
+Su propósito es complementar la solución modelada en Flowable, sirviendo como capa de soporte para manejar información del negocio mediante servicios REST.
 
-```text
-backend/cobros/
-├── pom.xml
-├── src/main/java/com/tequecoso/cobros/
-│   ├── CobrosApplication.java
-│   ├── controller/
-│   └── model/
-└── src/main/resources/application.properties
-```
-
-## Tecnologías usadas
-
+## Tecnologías utilizadas
 - Java 17
 - Spring Boot
 - Maven
-- API REST con controladores anotados con `@RestController`
 
-## Endpoints disponibles
+## Estructura actual del proyecto
 
-| Recurso | Método | Ruta | Descripción |
-|---|---|---|---|
-| Clientes | GET | `/api/clientes` | Lista los clientes registrados. |
-| Clientes | POST | `/api/clientes` | Registra un nuevo cliente. |
-| Cobros | GET | `/api/cobros` | Lista los cobros registrados. |
-| Cobros | POST | `/api/cobros` | Registra un nuevo cobro. |
-| Proveedores | GET | `/api/proveedores` | Lista los proveedores registrados. |
-| Proveedores | POST | `/api/proveedores` | Registra un nuevo proveedor. |
-| Pagos a proveedor | GET | `/api/pagos-proveedor` | Lista los pagos registrados. |
-| Pagos a proveedor | POST | `/api/pagos-proveedor` | Registra un nuevo pago a proveedor. |
+```text
+backend/
+└── cobros/
+    ├── src/
+    │   ├── main/
+    │   │   ├── java/com/tequecoso/cobros/
+    │   │   │   ├── controller/
+    │   │   │   │   ├── ClienteController.java
+    │   │   │   │   ├── CobroController.java
+    │   │   │   │   ├── PagoProveedorController.java
+    │   │   │   │   └── ProveedorController.java
+    │   │   │   ├── model/
+    │   │   │   │   ├── Cliente.java
+    │   │   │   │   ├── Cobro.java
+    │   │   │   │   ├── PagoProveedor.java
+    │   │   │   │   └── Proveedor.java
+    │   │   │   └── CobrosApplication.java
+    │   │   └── resources/
+    │   │       └── application.properties
+    │   └── test/
+    └── pom.xml
+```
+
+## Componentes principales
+
+### Clase principal
+- `CobrosApplication.java`: clase principal de arranque del proyecto Spring Boot.
+
+### Controladores
+- `ClienteController.java`: gestiona las operaciones relacionadas con clientes.
+- `CobroController.java`: gestiona las operaciones relacionadas con cobros.
+- `ProveedorController.java`: gestiona las operaciones relacionadas con proveedores.
+- `PagoProveedorController.java`: gestiona las operaciones relacionadas con pagos a proveedores.
+
+### Modelos
+- `Cliente.java`: representa la información de un cliente.
+- `Cobro.java`: representa la información de un cobro.
+- `Proveedor.java`: representa la información de un proveedor.
+- `PagoProveedor.java`: representa la información de un pago a proveedor.
+
+## Funcionalidad general
+El backend permite estructurar operaciones básicas del negocio a través de servicios REST. Estas operaciones están orientadas a apoyar los procesos implementados en Flowable para:
+
+- Registro de clientes
+- Registro de proveedores
+- Cobro a clientes
+- Pago a proveedores
 
 ## Ejecución local
+Para ejecutar el proyecto en local:
 
-Para ejecutar el proyecto localmente:
+1. Tener instalado Java 17.
+2. Tener instalado Maven.
+3. Abrir la carpeta `backend/cobros`.
+4. Ejecutar el siguiente comando:
 
 ```bash
-cd backend/cobros
 mvn spring-boot:run
 ```
 
-En Windows también puede usarse:
+## Configuración
+El archivo `application.properties` contiene la configuración básica del proyecto.
 
-```bash
-mvnw.cmd spring-boot:run
-```
+## Relación con el proyecto
+Este backend forma parte de la arquitectura general de la solución y sirve como capa de soporte para los procesos BPMN y formularios implementados en Flowable.
 
-Si la aplicación inicia correctamente, queda disponible en:
-
-```bash
-http://localhost:8080
-```
-
-## Ejemplos de prueba
-
-### Crear cliente
-
-```bash
-curl -X POST http://localhost:8080/api/clientes \
-  -H "Content-Type: application/json" \
-  -d '{"nombre":"Juan Perez","telefono":"0412-1234567","direccion":"Maracay","observacion":"Cliente nuevo"}'
-```
-
-### Consultar clientes
-
-```bash
-curl http://localhost:8080/api/clientes
-```
-
-### Crear cobro
-
-```bash
-curl -X POST http://localhost:8080/api/cobros \
-  -H "Content-Type: application/json" \
-  -d '{"cliente":"Juan Perez","monto":15000,"estado":"pendiente"}'
-```
-
-### Consultar cobros
-
-```bash
-curl http://localhost:8080/api/cobros
-```
-
-### Crear proveedor
-
-```bash
-curl -X POST http://localhost:8080/api/proveedores \
-  -H "Content-Type: application/json" \
-  -d '{"nombre":"Distribuidora ABC","telefono":"0412-0000000","direccion":"Maracay","observacion":"Entrega semanal"}'
-```
-
-### Consultar proveedores
-
-```bash
-curl http://localhost:8080/api/proveedores
-```
-
-### Crear pago a proveedor
-
-```bash
-curl -X POST http://localhost:8080/api/pagos-proveedor \
-  -H "Content-Type: application/json" \
-  -d '{"proveedor":"Distribuidora ABC","fecha":"2026-07-08","monto":150.0,"metodoPago":"Transferencia","observacion":"Pago parcial"}'
-```
-
-### Consultar pagos a proveedor
-
-```bash
-curl http://localhost:8080/api/pagos-proveedor
-```
-
-## Observación actual
-
-La implementación actual utiliza almacenamiento en memoria mediante listas, por lo que los datos se pierden al reiniciar la aplicación. Esta versión corresponde a un MVP funcional para la entrega académica.
+En conjunto, Flowable, los formularios y el backend permiten representar una propuesta integrada para la gestión de operaciones del negocio.
