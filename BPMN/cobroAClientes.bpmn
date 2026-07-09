@@ -4,7 +4,7 @@
     <extensionElements>
       <design:stencilid><![CDATA[BPMNDiagram]]></design:stencilid>
       <design:creationdate><![CDATA[2026-07-07T01:29:13.471Z]]></design:creationdate>
-      <design:modificationdate><![CDATA[2026-07-08T01:47:44.699Z]]></design:modificationdate>
+      <design:modificationdate><![CDATA[2026-07-09T09:49:00.873Z]]></design:modificationdate>
     </extensionElements>
     <userTask id="FormTask_1" name="Registrar Deuda" flowable:assignee="${initiator}" flowable:formKey="formularioRegistrarDeuda" flowable:formFieldValidation="false">
       <extensionElements>
@@ -13,18 +13,66 @@
         <design:stencilsuperid><![CDATA[Task]]></design:stencilsuperid>
       </extensionElements>
     </userTask>
+    <serviceTask id="HttpTask_21" name="HTTP task" flowable:parallelInSameTransaction="false" flowable:type="http">
+      <extensionElements>
+        <flowable:field name="requestMethod">
+          <flowable:string><![CDATA[POST]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="requestUrl">
+          <flowable:string><![CDATA[http://192.168.1.40:8080/api/cobros]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="requestHeaders">
+          <flowable:string><![CDATA[Content-Type = application/json
+
+Accept = application/json]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="requestBody">
+          <flowable:string><![CDATA[{
+  "cliente": "Juanito Perez",
+  "monto": 15000,
+  "fechaVencimiento": "2026-07-31",
+  "estado": "pendiente"
+}]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="disallowRedirects">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="ignoreException">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="saveRequestVariables">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="saveResponseParameters">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="saveResponseParametersTransient">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="saveResponseVariableAsJson">
+          <flowable:string><![CDATA[false]]></flowable:string>
+        </flowable:field>
+        <design:stencilid><![CDATA[HttpTask]]></design:stencilid>
+        <design:stencilsuperid><![CDATA[Task]]></design:stencilsuperid>
+      </extensionElements>
+    </serviceTask>
     <startEvent id="startnoneevent1" flowable:initiator="initiator" flowable:formFieldValidation="false">
       <extensionElements>
         <flowable:work-form-field-validation><![CDATA[false]]></flowable:work-form-field-validation>
         <design:stencilid><![CDATA[StartNoneEvent]]></design:stencilid>
       </extensionElements>
     </startEvent>
-    <endEvent id="EndNoneEvent_16">
+    <endEvent id="EndNoneEvent_23">
       <extensionElements>
         <design:stencilid><![CDATA[EndNoneEvent]]></design:stencilid>
       </extensionElements>
     </endEvent>
-    <sequenceFlow id="SequenceFlow_16" sourceRef="FormTask_1" targetRef="EndNoneEvent_16">
+    <sequenceFlow id="SequenceFlow_22" sourceRef="FormTask_1" targetRef="HttpTask_21">
+      <extensionElements>
+        <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="SequenceFlow_24" sourceRef="HttpTask_21" targetRef="EndNoneEvent_23">
       <extensionElements>
         <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
       </extensionElements>
@@ -40,15 +88,22 @@
       <bpmndi:BPMNShape bpmnElement="FormTask_1" id="BPMNShape_FormTask_1">
         <omgdc:Bounds height="80.0" width="100.0" x="530.0" y="243.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="HttpTask_21" id="BPMNShape_HttpTask_21">
+        <omgdc:Bounds height="80.0" width="100.0" x="680.0" y="243.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="startnoneevent1" id="BPMNShape_startnoneevent1">
         <omgdc:Bounds height="30.0" width="30.0" x="394.0" y="268.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="EndNoneEvent_16" id="BPMNShape_EndNoneEvent_16">
-        <omgdc:Bounds height="28.0" width="28.0" x="728.0000000000001" y="269.0"></omgdc:Bounds>
+      <bpmndi:BPMNShape bpmnElement="EndNoneEvent_23" id="BPMNShape_EndNoneEvent_23">
+        <omgdc:Bounds height="28.0" width="28.0" x="829.0" y="269.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_16" id="BPMNEdge_SequenceFlow_16" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_22" id="BPMNEdge_SequenceFlow_22" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
         <omgdi:waypoint x="630.0" y="283.0"></omgdi:waypoint>
-        <omgdi:waypoint x="728.0000000000001" y="283.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="283.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_24" id="BPMNEdge_SequenceFlow_24" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="780.0" y="283.0"></omgdi:waypoint>
+        <omgdi:waypoint x="829.0" y="283.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="SequenceFlow_9" id="BPMNEdge_SequenceFlow_9" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
         <omgdi:waypoint x="424.0" y="283.0"></omgdi:waypoint>
