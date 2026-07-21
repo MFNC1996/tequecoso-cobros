@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tequecoso Frontend</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-offset: #edeae5;
+      --color-border: #d4d1ca;
+      --color-text: #28251d;
+      --color-text-muted: #7a7974;
+      --color-text-inverse: #f9f8f4;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-primary-highlight: #cedcd8;
+      --color-success: #437a22;
+      --color-error: #a12c7b;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 12px 32px rgba(0,0,0,0.08);
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --font-body: 'Satoshi', 'Inter', sans-serif;
+      --font-display: 'Satoshi', 'Inter', sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #201f1d;
+      --color-surface-offset: #22211f;
+      --color-border: #393836;
+      --color-text: #cdccca;
+      --color-text-muted: #979691;
+      --color-text-inverse: #2b2a28;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #227f8b;
+      --color-primary-highlight: #313b3b;
+      --color-success: #6daa45;
+      --color-error: #d163a7;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.25);
+      --shadow-md: 0 12px 32px rgba(0,0,0,0.35);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: none; text-size-adjust: none; scroll-behavior: smooth; }
+    body {
+      min-height: 100dvh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 35%),
+        var(--color-bg);
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    button {
+      cursor: pointer;
+      border: none;
+      transition: background var(--transition-interactive), transform var(--transition-interactive), box-shadow var(--transition-interactive);
+    }
+    a, button, input, textarea, select { transition: all var(--transition-interactive); }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-6);
+      display: grid;
+      gap: var(--space-6);
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+      background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: var(--space-4);
+      z-index: 20;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand svg { width: 32px; height: 32px; color: var(--color-primary); }
+    .brand small { display: block; font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }
+    .theme-toggle, .refresh-btn {
+      min-width: 44px; min-height: 44px;
+      border-radius: var(--radius-full, 9999px);
+      background: var(--color-surface-2);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      color: var(--color-text);
+      padding: 0 var(--space-4);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-6);
+      align-items: stretch;
+    }
+    .hero-card, .status-card, .panel {
+      background: var(--color-surface);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-card {
+      padding: var(--space-8);
+      display: grid;
+      gap: var(--space-4);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: var(--space-2) var(--space-3);
+      border-radius: 999px;
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      max-width: 14ch;
+    }
+    .hero p { color: var(--color-text-muted); max-width: 58ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .btn {
+      min-height: 44px;
+      padding: 0 var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-secondary {
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+    .status-card {
+      padding: var(--space-6);
+      display: grid;
+      gap: var(--space-4);
+      align-content: start;
+    }
+    .status-list { display: grid; gap: var(--space-3); }
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+      font-size: var(--text-sm);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+    .panel {
+      padding: var(--space-6);
+      display: grid;
+      gap: var(--space-5);
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .panel h2 { font-size: var(--text-lg); line-height: 1.2; }
+    .muted { color: var(--color-text-muted); font-size: var(--text-sm); }
+    form { display: grid; gap: var(--space-4); }
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-4); }
+    .field { display: grid; gap: var(--space-2); }
+    label { font-size: var(--text-sm); font-weight: 700; }
+    input, select, textarea {
+      width: 100%;
+      min-height: 46px;
+      border-radius: var(--radius-md);
+      border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+      background: var(--color-surface-2);
+      padding: var(--space-3) var(--space-4);
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .message {
+      min-height: 24px;
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+    .message.success { color: var(--color-success); }
+    .message.error { color: var(--color-error); }
+    .list {
+      display: grid;
+      gap: var(--space-3);
+      max-height: 360px;
+      overflow: auto;
+      padding-right: var(--space-2);
+    }
+    .card-item {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-2);
+      border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+      display: grid;
+      gap: var(--space-2);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      align-items: start;
+    }
+    .badge {
+      width: fit-content;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      text-transform: capitalize;
+    }
+    .empty {
+      padding: var(--space-8);
+      text-align: center;
+      color: var(--color-text-muted);
+      background: var(--color-surface-2);
+      border-radius: var(--radius-lg);
+      border: 1px dashed color-mix(in srgb, var(--color-text) 16%, transparent);
+    }
+    .footer-note {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      padding-bottom: var(--space-6);
+    }
+    @media (max-width: 900px) {
+      .hero, .grid, .field-grid { grid-template-columns: 1fr; }
+      .topbar, .panel-header { align-items: start; }
+    }
+    @media (max-width: 640px) {
+      .app { padding: var(--space-4); }
+      .hero-card, .status-card, .panel { padding: var(--space-5); }
+      .topbar { flex-wrap: wrap; }
+      .hero-actions { flex-direction: column; }
+      .btn, .refresh-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#contenido">Saltar al contenido</a>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand" aria-label="Tequecoso Cobros">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect x="6" y="8" width="36" height="32" rx="10" stroke="currentColor" stroke-width="3"></rect>
+          <path d="M16 20h16M16 28h10" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+          <circle cx="34" cy="28" r="4" fill="currentColor"></circle>
+        </svg>
+        <div>
+          <div>Tequecoso Cobros</div>
+          <small>Frontend visual para clientes y cobros</small>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <button class="refresh-btn" id="btnRecargar" type="button">Recargar</button>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar tema">🌙</button>
+      </div>
+    </header>
+
+    <main id="contenido" style="display:grid; gap: var(--space-6);">
+      <section class="hero" aria-labelledby="titulo-app">
+        <article class="hero-card">
+          <span class="eyebrow">Conectado a Spring Boot</span>
+          <h1 id="titulo-app">Interfaz visual para registrar clientes y cobros</h1>
+          <p>Este frontend envía datos al backend en <strong>localhost:8080</strong> usando los mismos campos de tus clases Java: clientes con nombre, teléfono, dirección y observación; y cobros con cliente, monto, fecha de vencimiento y estado.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" onclick="document.getElementById('formCliente').scrollIntoView({behavior:'smooth'})">Ir a clientes</button>
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('formCobro').scrollIntoView({behavior:'smooth'})">Ir a cobros</button>
+          </div>
+        </article>
+        <aside class="status-card" aria-label="Estado del sistema">
+          <h2 style="font-size:var(--text-lg);">Resumen técnico</h2>
+          <div class="status-list">
+            <div class="status-item"><span>Backend</span><strong>http://localhost:8080</strong></div>
+            <div class="status-item"><span>Clientes</span><strong>GET / POST</strong></div>
+            <div class="status-item"><span>Cobros</span><strong>GET / POST</strong></div>
+            <div class="status-item"><span>Flowable</span><strong>http://localhost:8090</strong></div>
+          </div>
+          <p class="muted">Si el navegador bloquea las peticiones por CORS, habrá que habilitarlo en el backend antes de usar este frontend desde archivo o desde un puerto distinto.</p>
+        </aside>
+      </section>
+
+      <section class="grid">
+        <article class="panel" id="formCliente">
+          <div class="panel-header">
+            <div>
+              <h2>Registrar cliente</h2>
+              <p class="muted">Campos usados: nombre, telefono, direccion, observacion.</p>
+            </div>
+          </div>
+          <form id="clienteForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" placeholder="Juan Perez" required />
+              </div>
+              <div class="field">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" placeholder="0412-1234567" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="direccion">Dirección</label>
+              <input id="direccion" name="direccion" placeholder="Maracay" required />
+            </div>
+            <div class="field">
+              <label for="observacion">Observación</label>
+              <textarea id="observacion" name="observacion" placeholder="Cliente nuevo"></textarea>
+            </div>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <button class="btn btn-primary" type="submit">Guardar cliente</button>
+              <button class="btn btn-secondary" type="button" id="verClientes">Actualizar listado</button>
+            </div>
+            <div id="clienteMensaje" class="message" aria-live="polite"></div>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Clientes registrados</h2>
+              <p class="muted">Datos recuperados desde GET /api/clientes.</p>
+            </div>
+          </div>
+          <div id="clientesLista" class="list"></div>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel" id="formCobro">
+          <div class="panel-header">
+            <div>
+              <h2>Registrar cobro</h2>
+              <p class="muted">Campos usados: cliente, monto, fechaVencimiento, estado.</p>
+            </div>
+          </div>
+          <form id="cobroForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="clienteCobro">Cliente</label>
+                <input id="clienteCobro" name="cliente" placeholder="Juan Perez" required />
+              </div>
+              <div class="field">
+                <label for="monto">Monto</label>
+                <input id="monto" name="monto" type="number" min="0" step="0.01" placeholder="15000" required />
+              </div>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="fechaVencimiento">Fecha de vencimiento</label>
+                <input id="fechaVencimiento" name="fechaVencimiento" type="date" required />
+              </div>
+              <div class="field">
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" required>
+                  <option value="">Selecciona un estado</option>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="pagado">Pagado</option>
+                  <option value="vencido">Vencido</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <button class="btn btn-primary" type="submit">Guardar cobro</button>
+              <button class="btn btn-secondary" type="button" id="verCobros">Actualizar listado</button>
+            </div>
+            <div id="cobroMensaje" class="message" aria-live="polite"></div>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Cobros registrados</h2>
+              <p class="muted">Datos recuperados desde GET /api/cobros.</p>
+            </div>
+          </div>
+          <div id="cobrosLista" class="list"></div>
+        </article>
+      </section>
+
+      <p class="footer-note">Frontend pensado para tu EV3: interfaz visual simple, conectada al backend local y útil como evidencia funcional.</p>
+    </main>
+  </div>
+
+  <script>
+    const state = {
+      theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+      baseUrl: 'http://localhost:8080',
+      clientes: [],
+      cobros: []
+    };
+
+    const html = document.documentElement;
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    html.setAttribute('data-theme', state.theme);
+    themeToggle.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', state.theme);
+      themeToggle.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+    });
+
+    const $ = (id) => document.getElementById(id);
+
+    function setMessage(id, text, type = '') {
+      const el = $(id);
+      el.textContent = text;
+      el.className = 'message' + (type ? ' ' + type : '');
+    }
+
+    async function request(path, options = {}) {
+      const response = await fetch(state.baseUrl + path, {
+        headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+        ...options
+      });
+      if (!response.ok) {
+        throw new Error('Error HTTP ' + response.status);
+      }
+      return response.json();
+    }
+
+    function renderClientes() {
+      const cont = $('clientesLista');
+      if (!state.clientes.length) {
+        cont.innerHTML = '<div class="empty">No hay clientes registrados todavía.</div>';
+        return;
+      }
+      cont.innerHTML = state.clientes.map((cliente, index) => `
+        <article class="card-item">
+          <div class="card-top">
+            <div>
+              <strong>${cliente.nombre || 'Sin nombre'}</strong>
+              <div class="muted">${cliente.telefono || 'Sin teléfono'}</div>
+            </div>
+            <span class="badge">Cliente ${index + 1}</span>
+          </div>
+          <div>${cliente.direccion || 'Sin dirección'}</div>
+          <div class="muted">${cliente.observacion || 'Sin observación'}</div>
+        </article>
+      `).join('');
+    }
+
+    function renderCobros() {
+      const cont = $('cobrosLista');
+      if (!state.cobros.length) {
+        cont.innerHTML = '<div class="empty">No hay cobros registrados todavía.</div>';
+        return;
+      }
+      cont.innerHTML = state.cobros.map((cobro, index) => `
+        <article class="card-item">
+          <div class="card-top">
+            <div>
+              <strong>${cobro.cliente || 'Sin cliente'}</strong>
+              <div class="muted">Monto: ${Number(cobro.monto || 0).toLocaleString('es-CL')}</div>
+            </div>
+            <span class="badge">${cobro.estado || 'sin estado'}</span>
+          </div>
+          <div>Vence: ${cobro.fechaVencimiento || 'Sin fecha'}</div>
+          <div class="muted">Cobro ${index + 1}</div>
+        </article>
+      `).join('');
+    }
+
+    async function cargarClientes() {
+      try {
+        state.clientes = await request('/api/clientes', { method: 'GET' });
+        renderClientes();
+      } catch (error) {
+        $('clientesLista').innerHTML = '<div class="empty">No fue posible cargar clientes. Revisa si el backend está ejecutándose o si falta habilitar CORS.</div>';
+      }
+    }
+
+    async function cargarCobros() {
+      try {
+        state.cobros = await request('/api/cobros', { method: 'GET' });
+        renderCobros();
+      } catch (error) {
+        $('cobrosLista').innerHTML = '<div class="empty">No fue posible cargar cobros. Revisa si el backend está ejecutándose o si falta habilitar CORS.</div>';
+      }
+    }
+
+    $('clienteForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = {
+        nombre: $('nombre').value.trim(),
+        telefono: $('telefono').value.trim(),
+        direccion: $('direccion').value.trim(),
+        observacion: $('observacion').value.trim()
+      };
+      try {
+        await request('/api/clientes', { method: 'POST', body: JSON.stringify(payload) });
+        setMessage('clienteMensaje', 'Cliente guardado correctamente.', 'success');
+        event.target.reset();
+        await cargarClientes();
+      } catch (error) {
+        setMessage('clienteMensaje', 'No se pudo guardar el cliente. Revisa CORS o el backend.', 'error');
+      }
+    });
+
+    $('cobroForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = {
+        cliente: $('clienteCobro').value.trim(),
+        monto: Number($('monto').value),
+        fechaVencimiento: $('fechaVencimiento').value,
+        estado: $('estado').value
+      };
+      try {
+        await request('/api/cobros', { method: 'POST', body: JSON.stringify(payload) });
+        setMessage('cobroMensaje', 'Cobro guardado correctamente.', 'success');
+        event.target.reset();
+        await cargarCobros();
+      } catch (error) {
+        setMessage('cobroMensaje', 'No se pudo guardar el cobro. Revisa CORS o el backend.', 'error');
+      }
+    });
+
+    $('verClientes').addEventListener('click', cargarClientes);
+    $('verCobros').addEventListener('click', cargarCobros);
+    $('btnRecargar').addEventListener('click', async () => {
+      await Promise.all([cargarClientes(), cargarCobros()]);
+    });
+
+    Promise.all([cargarClientes(), cargarCobros()]);
+  </script>
+</body>
+</html>
